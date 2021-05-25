@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Today</title>
+    {%load static%}
+    <link rel="shortcut icon" href="{% static "cloud.png" %}" type='image/png' />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet"
+	    href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+	    integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu"
+	    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="{% static "styleIndex.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&family=Lobster&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+</head>
+<body>
+    <div class='headerContainer'>
+        <div onclick="location.href='/';" style="cursor: pointer;">
+            <p>WeatherApp</p>
+        </div>    
+        <div class='searchBar'>
+            <form class="searchBar" method='POST'>
+                {% csrf_token %}
+                {{form.name}} 
+            </form>
+        </div>
+        <div class='profile-dropdown'>
+            <button class='dropB'>
+                <img class='profileImg' src = {% static 'profile.png' %} type='image/png'>
+            </button>
+            <div class='dropContent'>
+                <a href='/'> My info </a>
+                <a href='/'> My cities </a>
+                <a href='/'> Log out </a>
+            </div>   
+        </div>
+    </div>
+    <div class='titleContent'>
+    </div>
+    <div class='midContent'>
+        <div class='slider owl-carousel'>
+            {% for city_weather in weather_data %}
+            <div class="card">
+                <div class="card-header"><p>{{city_weather.name}} <span>{{city_weather.country}}</span></p></div>
+                    <hr size="2" width="60%" align="center" style="border-color:#FFFFFF;">
+                <div class="card-body">
+                    <img class='iconImg' src='http://openweathermap.org/img/wn/{{city_weather.icon}}.png'/>
+                    <p class="card-text">{{city_weather.temp}}°C</p>
+                    <p class='minmax'>{{city_weather.temp_max}}°C <br> {{city_weather.temp_min}}°C</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <footer class='footerContainer'>
+        <p> Made by <a href='https://github.com/isabellaaquino'>Isabella Aquino</a> </p>
+        <a href='https://www.linkedin.com/in/isabella-aquino/'> <i class="fab fa-linkedin"></i></a>
+        <a href='https://github.com/isabellaaquino'> <i class="fab fa-github"></i>
+    </footer>
+    </div>
+    
+    <script>
+        $(".slider").owlCarousel({
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            items: 3,
+            center: true,
+    
+        });
+    </script>
+
+</body>
+</html>
