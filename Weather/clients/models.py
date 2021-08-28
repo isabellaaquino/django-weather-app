@@ -7,5 +7,5 @@ class Client(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     cities = models.JSONField(default=[])
 
-class City(models.Model):
-    name = models.CharField(max_length=50)
+class MainCities(models.Model):
+    cities = models.JSONField(default=[])

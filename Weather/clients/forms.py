@@ -1,10 +1,10 @@
 from django.forms import ModelForm, TextInput
-from .models import City, Client
+from .models import MainCities, Client
 
-class CityForm(ModelForm):
-    class Meta:
-        model = City
-        fields = {
-            'name'
-        }
-        widgets = {'name': TextInput(attrs={'class': 'searchInput', 'placeholder': 'Choose a city...'})}
+# class ClientForm(ModelForm):
+#     class Meta:
+#         model = Client
+#         fields = {
+#             'user'
+#         }
+#         widgets = {'name': TextInput(attrs={'class': 'searchInput', 'placeholder': 'Choose a city...'})}

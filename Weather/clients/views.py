@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Client, City
+from .models import Client, MainCities
+from City.forms import CityForm
 import requests
 from .forms import CityForm
 # Create your views here.
@@ -16,7 +17,7 @@ def indexView(request):
             form.save()    
     
     form = CityForm()        
-    cities = City.objects.all()
+    cities = MainCities.objects.all()
 
     for city in cities:
         response = requests.get(url.format(city.name)).json()
